@@ -1,0 +1,31 @@
+:root {
+  /* Colores principales */
+  --ion-color-primary: #6a11cb;
+  --ion-color-secondary: #2575fc;
+  --ion-color-light: #ffffff;
+  --ion-color-dark: #333333;
+
+  /* Fondo y texto para modo claro */
+  --ion-background-color: #d7d5d5;
+  --ion-text-color: #000000;
+
+  /* Otros colores */
+  --ion-color-success: #10dc60;
+  --ion-color-warning: #ffce00;
+  --ion-color-danger: #f04141;
+  --ion-color-medium: #92949c;
+  --gradiant: linear-gradient(135deg, #2c84d6 0%, #d125fca0 100%);
+}
+
+body.dark {
+  /* Fondo y texto para modo oscuro */
+  --ion-background-color: #000000;
+  --ion-text-color: #ffffff;
+
+  /* Ajustes de colores oscuros */
+  --ion-color-primary: #2C5B6F;
+  --ion-color-secondary: #03dac6;
+  --ion-color-light: #333333;
+  --ion-color-dark: #ffffff;
+  --gradiant: linear-gradient(135deg, #4a2c6f 0%, #2C5B6F 100%);
+}

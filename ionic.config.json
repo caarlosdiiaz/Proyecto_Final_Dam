@@ -1,0 +1,7 @@
+{
+  "name": "lomo-toilet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

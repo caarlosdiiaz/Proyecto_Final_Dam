@@ -1,0 +1,45 @@
+ion-menu ion-content {
+  --background: var(--gradiant);
+  color: var(--ion-color-light);
+}
+
+ion-menu.md ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-menu.md ion-list {
+  padding: 20px 0;
+}
+
+ion-menu.md ion-item {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0);
+  color: var(--ion-text-color);
+}
+
+ion-menu.md ion-item.selected {
+  --background: rgba(255, 255, 255, 0.2);
+}
+
+ion-menu.md ion-item ion-icon {
+  color: var(--ion-text-color);
+}
+
+ion-menu.md ion-item ion-label {
+  font-weight: 500;
+  color: var(--ion-text-color);
+}
+
+ion-list-header{
+  font-size: 1.5rem;
+}
+
+ion-icon, ion-label{
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
