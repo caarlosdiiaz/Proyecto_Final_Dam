@@ -23,7 +23,6 @@ const Login: React.FC = () => {
   });
 
   useEffect(() => {
-    // Apply the theme class to the body
     document.body.classList.toggle("dark", isDarkMode);
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);

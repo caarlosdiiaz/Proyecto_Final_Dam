@@ -9,7 +9,7 @@ import {
   IonMenuToggle,
 } from "@ionic/react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import {
   readerSharp,
   buildSharp,
@@ -64,18 +64,22 @@ const appPages: AppPage[] = [
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const history = useHistory();
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
   });
 
   useEffect(() => {
-    // Apply the theme class to the body
     document.body.classList.toggle("dark", isDarkMode);
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
+  };
+
+  const handleLogout = () => {
+    history.push("/");
   };
 
   const renderMenuItems = () =>
@@ -89,6 +93,7 @@ const Menu: React.FC = () => {
           routerDirection="none"
           lines="none"
           detail={false}
+          onClick={appPage.title === "Cerrar sesión" ? handleLogout : undefined} // Llama a handleLogout si es "Cerrar sesión"
         >
           <IonIcon
             aria-hidden="true"
@@ -109,12 +114,18 @@ const Menu: React.FC = () => {
           <IonListHeader className="list-group-item list-group-item-action active">
             Menú
             <img
-            src={isDarkMode ? moonSharp : sunnySharp}
-            alt={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
-            aria-label={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
-            onClick={toggleTheme}
-            style={{ cursor: "pointer", width: "30px", height: "30px", position:"absolute", right: "0px", }}
-          />
+              src={isDarkMode ? moonSharp : sunnySharp}
+              alt={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
+              aria-label={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
+              onClick={toggleTheme}
+              style={{
+                cursor: "pointer",
+                width: "30px",
+                height: "30px",
+                position: "absolute",
+                right: "0px",
+              }}
+            />
           </IonListHeader>
           {renderMenuItems()}
         </IonList>
