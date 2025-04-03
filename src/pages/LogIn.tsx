@@ -9,6 +9,7 @@ import {
   IonRow,
   IonCol,
   IonText,
+  IonInputPasswordToggle,
 } from "@ionic/react";
 import { sunnySharp, moonSharp } from "ionicons/icons";
 import { Profesor } from "../interfaces templates";
@@ -110,7 +111,9 @@ const Login: React.FC = () => {
                     onIonChange={(e) => setPassword(e.detail.value!)}
                     required
                     className="form-control ion-padding-start"
-                  />
+                  > 
+                    <IonInputPasswordToggle slot="end" />
+                  </IonInput>
                   <IonButton expand="block" type="submit" className="fw-bold">
                     Iniciar sesion
                   </IonButton>
