@@ -1,6 +1,7 @@
-import { IonCol, IonGrid, IonRow } from '@ionic/react';
-import { useState, useEffect } from 'react';
-import { Alumno } from '../../interfaces templates';
+import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { useState, useEffect } from "react";
+import { Alumno } from "../../interfaces templates";
+import './tableComponent.css'
 
 function TableComponent({
   nivel,
@@ -24,12 +25,12 @@ function TableComponent({
           `http://localhost:8080/api/alumnos/curso?nivel=${nivel}&grupo=${grupo}`
         );
         if (!response.ok) {
-          throw new Error('Error en la autenticación');
+          throw new Error("Error en la autenticación");
         }
         const data = await response.json();
         setAlumnos(data);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -37,21 +38,25 @@ function TableComponent({
   }, [nivel, grupo]);
 
   return (
-    <IonGrid>
-      <IonRow>
+    <IonGrid className="table table-striped table-hover">
+      <IonRow className="table-header">
         <IonCol>Nombre</IonCol>
         <IonCol>Apellidos</IonCol>
         <IonCol>Curso</IonCol>
         <IonCol>Repetidor</IonCol>
       </IonRow>
       {alumnos.map((alumno) => (
-        <IonRow key={alumno.id} onClick={() => seleccionarAlumno(alumno)}>
+        <IonRow
+          key={alumno.id}
+          className="table-row"
+          onClick={() => seleccionarAlumno(alumno)}
+        >
           <IonCol>{alumno.nombre}</IonCol>
           <IonCol>{alumno.apellidos}</IonCol>
           <IonCol>
             {nivel} {grupo}
           </IonCol>
-          <IonCol>{alumno.repetidor ? 'Sí' : 'No'}</IonCol>
+          <IonCol>{alumno.repetidor ? "Sí" : "No"}</IonCol>
         </IonRow>
       ))}
     </IonGrid>
