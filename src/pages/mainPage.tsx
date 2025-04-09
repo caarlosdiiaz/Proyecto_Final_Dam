@@ -12,42 +12,70 @@ import {
   IonLabel,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useHistory } from "react-router-dom";
+import { Alumno } from "../interfaces templates";
 import TableComponent from "../components/mainPage/tableComponent";
 
 import { Profesor } from "../interfaces templates";
 
 const Page: React.FC = () => {
-  const location = useLocation<{ profesor: Profesor }>();
-  const profesor = location.state?.profesor;
-
-  useEffect(() => {
-    if (!profesor) {
-      console.error("No se encontró información del profesor.");
-    }
-  }, [profesor]);
-
   const [niveles, setNiveles] = useState<string[]>([]);
   const [grupos, setGrupos] = useState<string[]>([]);
   const [selectedNivel, setSelectedNivel] = useState<string | null>(null);
   const [selectedGrupo, setSelectedGrupo] = useState<string | null>(null);
+  const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null); // Nuevo estado
+  const history = useHistory();
+  const [profesor, setProfesor] = useState<Profesor | null>(null);
+
+  const handleAlumnoSelect = (alumno: Alumno) => {
+    setSelectedAlumno(alumno); // Actualiza el estado con el alumno seleccionado
+    console.log("Alumno seleccionado:", alumno);
+  };
 
   useEffect(() => {
+    const storedProfesor = localStorage.getItem("profesor");
+    if (storedProfesor) {
+      setProfesor(JSON.parse(storedProfesor));
+    } else {
+      history.push("/");
+    }
+  }, [history]);
+
+  useEffect(() => {
+    if (!profesor) return;
+
     const fetchData = async () => {
       try {
         const response = await fetch(
           "http://localhost:8080/api/cursos/niveles-grupos"
         );
-        const data = await response.json();
-        setNiveles(data.niveles);
-        setGrupos(data.grupos);
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos");
+        }
+        const data: { nivel: string; grupo: string }[] = await response.json();
+
+        const uniqueNiveles = Array.from(
+          new Set(data.map((item) => item.nivel))
+        );
+        const uniqueGrupos = Array.from(
+          new Set(data.map((item) => item.grupo))
+        );
+
+        setNiveles(uniqueNiveles);
+        setGrupos(uniqueGrupos);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setNiveles([]);
+        setGrupos([]);
       }
     };
 
     fetchData();
-  }, []);
+  }, [profesor]);
+
+  if (!profesor) {
+    return null;
+  }
 
   return (
     <IonPage>
@@ -103,7 +131,7 @@ const Page: React.FC = () => {
                 {grupos.map((grupo, index) => (
                   <p
                     key={index}
-                    onClick={() => setSelectedGrupo(grupo)} // Set selected grupo
+                    onClick={() => setSelectedGrupo(grupo)}
                     className={`mb-2 p-2 rounded ${
                       selectedGrupo === grupo
                         ? "bg-info text-white"
@@ -116,13 +144,25 @@ const Page: React.FC = () => {
                 ))}
               </div>
             </IonAccordion>
-          </IonAccordionGroup>
+            </IonAccordionGroup>
           {selectedNivel && selectedGrupo ? (
-            <TableComponent nivel={selectedNivel} grupo={selectedGrupo} />
+            <TableComponent
+              nivel={selectedNivel}
+              grupo={selectedGrupo}
+              onAlumnoSelect={handleAlumnoSelect}
+            />
           ) : (
             <p style={{ textAlign: "center", marginTop: "20px" }}>
-              Por favor, selecciona un nivel y un grupo para ver los datos.
+              Selecciona un nivel y un grupo para ver los datos.
             </p>
+          )}
+          {selectedAlumno && (
+            <div className="mt-5">
+              <h2><b>Alumno seleccionado:</b></h2>
+              <p>
+                {selectedAlumno.nombre} {selectedAlumno.apellidos}
+              </p>
+            </div>
           )}
         </div>
       </IonContent>

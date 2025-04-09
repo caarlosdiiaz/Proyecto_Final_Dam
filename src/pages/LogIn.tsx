@@ -12,12 +12,10 @@ import {
   IonInputPasswordToggle,
 } from "@ionic/react";
 import { sunnySharp, moonSharp } from "ionicons/icons";
-import { Profesor } from "../interfaces templates";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [profesor, setProfesor] = useState<Profesor | null>(null);
   const history = useHistory();
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
@@ -37,7 +35,7 @@ const Login: React.FC = () => {
       email: email.trim(),
       contrasena: password.trim(),
     };
-
+  
     fetch("http://localhost:8080/api/profesores/login", {
       method: "POST",
       headers: {
@@ -47,21 +45,20 @@ const Login: React.FC = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error en la autenticación");
+          return response.json().then((error) => {
+            throw new Error(error.message || "Error en la autenticación");
+          });
         }
         return response.json();
       })
       .then((data) => {
-        setProfesor(data);
-        history.push({
-          pathname: `/home/${profesor?.id}`,
-          state: { profesor: data },
-        });
+        localStorage.setItem("profesor", JSON.stringify(data)); // Guardar en localStorage
+        history.push("/home");
       })
       .catch((error) => {
         console.error("Error:", error);
         alert(
-          "Error en la autenticación. Por favor, verifica tus credenciales."
+          error.message || "Error en la autenticación. Por favor, verifica tus credenciales."
         );
       });
   };
