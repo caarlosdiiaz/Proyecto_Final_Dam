@@ -11,6 +11,7 @@ import {
 
 import { useLocation, useHistory } from "react-router-dom";
 import {
+  homeSharp,
   readerSharp,
   buildSharp,
   helpSharp,
@@ -31,6 +32,11 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
+    title: "Inicio",
+    url: "/home",
+    iosIcon: homeSharp,
+    mdIcon: homeSharp,
+  },{
     title: "Ayuda",
     url: "/help",
     iosIcon: helpSharp,
@@ -56,7 +62,7 @@ const appPages: AppPage[] = [
   },
   {
     title: "Cerrar sesión",
-    url: "/logout",
+    url: "/",
     iosIcon: powerSharp,
     mdIcon: powerSharp,
   },
@@ -79,6 +85,7 @@ const Menu: React.FC = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("profesor");
     history.push("/");
   };
 

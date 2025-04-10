@@ -52,7 +52,7 @@ const Login: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        localStorage.setItem("profesor", JSON.stringify(data)); // Guardar en localStorage
+        localStorage.setItem("profesor", JSON.stringify(data));
         history.push("/home");
       })
       .catch((error) => {

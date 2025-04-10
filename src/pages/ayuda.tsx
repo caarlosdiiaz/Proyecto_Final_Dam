@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 
-const ayuda: React.FC = () => {
+const Ayuda: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
@@ -38,4 +38,4 @@ const ayuda: React.FC = () => {
   );
 };
 
-export default ayuda;
+export default Ayuda;

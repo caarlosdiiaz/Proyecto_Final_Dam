@@ -1,13 +1,13 @@
 import { IonContent, IonPage } from "@ionic/react";
 
-function datosPersonales() {
+function DatosPersonales() {
   return (
     <IonPage>
       <IonContent>
-        
+        <div>DatosPersonales</div>
       </IonContent>
     </IonPage>
   )
 }
 
-export default datosPersonales
+export default DatosPersonales
