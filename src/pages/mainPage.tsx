@@ -1,34 +1,33 @@
 import {
   IonAccordion,
   IonAccordionGroup,
-  IonButtons,
   IonContent,
   IonHeader,
-  IonMenuButton,
   IonPage,
   IonTitle,
-  IonToolbar,
   IonItem,
   IonLabel,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Alumno } from "../interfaces templates";
+import { Alumno } from "../templates/interfaces templates";
 import TableComponent from "../components/mainPage/tableComponent";
 
-import { Profesor } from "../interfaces templates";
+import { Profesor } from "../templates/interfaces templates";
+
+const API_URL = "http://localhost:8080/api/cursos/niveles-grupos"; // URL movida fuera del método
 
 const Page: React.FC = () => {
   const [niveles, setNiveles] = useState<string[]>([]);
   const [grupos, setGrupos] = useState<string[]>([]);
   const [selectedNivel, setSelectedNivel] = useState<string | null>(null);
   const [selectedGrupo, setSelectedGrupo] = useState<string | null>(null);
-  const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null); // Nuevo estado
+  const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null);
   const history = useHistory();
   const [profesor, setProfesor] = useState<Profesor | null>(null);
 
   const handleAlumnoSelect = (alumno: Alumno) => {
-    setSelectedAlumno(alumno); // Actualiza el estado con el alumno seleccionado
+    setSelectedAlumno(alumno);
     console.log("Alumno seleccionado:", alumno);
   };
 
@@ -42,27 +41,18 @@ const Page: React.FC = () => {
   }, [history]);
 
   useEffect(() => {
-    if (!profesor) return;
-
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8080/api/cursos/niveles-grupos"
-        );
+        const response = await fetch(API_URL); // Usamos la constante global
         if (!response.ok) {
           throw new Error("Error al obtener los datos");
         }
-        const data: { nivel: string; grupo: string }[] = await response.json();
+        const data: { niveles: string[]; grupos: string[] } = await response.json();
 
-        const uniqueNiveles = Array.from(
-          new Set(data.map((item) => item.nivel))
-        );
-        const uniqueGrupos = Array.from(
-          new Set(data.map((item) => item.grupo))
-        );
-
-        setNiveles(uniqueNiveles);
-        setGrupos(uniqueGrupos);
+        setNiveles(data.niveles);
+        setGrupos(data.grupos);
+        console.log("niveles: " + data.niveles);
+        console.log("grupos: " + data.grupos);
       } catch (error) {
         console.error("Error fetching data:", error);
         setNiveles([]);
@@ -70,8 +60,8 @@ const Page: React.FC = () => {
       }
     };
 
-    fetchData();
-  }, [profesor]);
+    fetchData(); // Ejecutar al cargar la página
+  }, []); // Eliminamos la dependencia de `profesor` para que se ejecute siempre al cargar
 
   if (!profesor) {
     return null;
@@ -80,16 +70,11 @@ const Page: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>
-            <h1>
-              Bienvenido, {profesor.nombre} {profesor.apellidos}
-            </h1>
-          </IonTitle>
-        </IonToolbar>
+        <IonTitle>
+          <h1>
+            Bienvenido, {profesor.nombre} {profesor.apellidos}
+          </h1>
+        </IonTitle>
       </IonHeader>
 
       <IonContent fullscreen>
@@ -144,7 +129,7 @@ const Page: React.FC = () => {
                 ))}
               </div>
             </IonAccordion>
-            </IonAccordionGroup>
+          </IonAccordionGroup>
           {selectedNivel && selectedGrupo ? (
             <TableComponent
               nivel={selectedNivel}
@@ -158,7 +143,9 @@ const Page: React.FC = () => {
           )}
           {selectedAlumno && (
             <div className="mt-5">
-              <h2><b>Alumno seleccionado:</b></h2>
+              <h2>
+                <b>Alumno seleccionado:</b>
+              </h2>
               <p>
                 {selectedAlumno.nombre} {selectedAlumno.apellidos}
               </p>

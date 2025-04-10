@@ -100,7 +100,7 @@ const Menu: React.FC = () => {
           routerDirection="none"
           lines="none"
           detail={false}
-          onClick={appPage.title === "Cerrar sesión" ? handleLogout : undefined} // Llama a handleLogout si es "Cerrar sesión"
+          onClick={appPage.title === "Cerrar sesión" ? handleLogout : undefined}
         >
           <IonIcon
             aria-hidden="true"
@@ -123,7 +123,6 @@ const Menu: React.FC = () => {
             <img
               src={isDarkMode ? moonSharp : sunnySharp}
               alt={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
-              aria-label={isDarkMode ? "Activar modo claro" : "Activar modo oscuro"}
               onClick={toggleTheme}
               style={{
                 cursor: "pointer",

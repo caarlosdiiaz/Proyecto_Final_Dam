@@ -1,6 +1,6 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { useState, useEffect } from "react";
-import { Alumno } from "../../interfaces templates";
+import { Alumno } from "../../templates/interfaces templates";
 import './tableComponent.css'
 
 function TableComponent({

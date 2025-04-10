@@ -11,7 +11,11 @@ ion-menu.md ion-content {
 }
 
 ion-menu.md ion-list {
-  padding: 20px 0;
+  padding: 0px 0;
+}
+
+ion-menu :last-child {
+  border-radius: 8;
 }
 
 ion-menu.md ion-item {
