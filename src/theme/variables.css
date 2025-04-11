@@ -19,7 +19,7 @@
 
 body.dark {
   /* Fondo y texto para modo oscuro */
-  --ion-background-color: #000000;
+  --ion-background-color: #2b2b2b;
   --ion-text-color: #ffffff;
 
   /* Ajustes de colores oscuros */

@@ -8,8 +8,9 @@ import {
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { sendEmail } from "../helpers/sendEmail";
+// import { sendEmail } from "../helpers/sendEmail";
 import { Profesor } from "../templates/interfaces templates";
+import { sendEmail } from "../helpers/sendEmail";
 
 
 function ReportarIncidencia() {
@@ -34,7 +35,8 @@ function ReportarIncidencia() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (profesor) {
-      // await sendEmail(`${profesor.nombre} ${profesor.apellidos}`, contenido);
+      await sendEmail(`${profesor.nombre} ${profesor.apellidos}`, contenido);
+      alert(`El profesor ${profesor.nombre} ha enviado un mail.`);
     } else {
       alert("No se encontró información del profesor.");
     }
@@ -45,7 +47,9 @@ function ReportarIncidencia() {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-            <h1>Reportar Incidencia</h1>
+            <b><h1>
+              Reportar Incidencia
+            </h1></b>
           </IonTitle>
         </IonToolbar>
       </IonHeader>

@@ -43,7 +43,7 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(API_URL); // Usamos la constante global
+        const response = await fetch(API_URL);
         if (!response.ok) {
           throw new Error("Error al obtener los datos");
         }
@@ -60,8 +60,8 @@ const Page: React.FC = () => {
       }
     };
 
-    fetchData(); // Ejecutar al cargar la página
-  }, []); // Eliminamos la dependencia de `profesor` para que se ejecute siempre al cargar
+    fetchData();
+  }, []);
 
   if (!profesor) {
     return null;
