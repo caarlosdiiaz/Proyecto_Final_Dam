@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email enviado desde lomoToilet</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Arial', sans-serif;
+      }
+
+      body {
+          background-color: #f4f7f9;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+      }
+
+      .container {
+          background-color: #ffffff;
+          width: 90%;
+          max-width: 600px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+      }
+
+      .header {
+          background-color: #4A90E2;
+          color: #ffffff;
+          text-align: center;
+          padding: 20px;
+      }
+
+      .content {
+          background-color: #ffffff;
+          padding: 20px;
+      }
+
+      .content h2 {
+          color: #333;
+          margin-bottom: 10px;
+      }
+
+      .content ul {
+          list-style-type: none;
+      }
+
+      .content li {
+          background: #eef4ff;
+          margin: 5px 0;
+          padding: 10px;
+          border-radius: 5px;
+          transition: background 0.3s;
+      }
+
+      .content li:hover {
+          background: #d0e0ff;
+      }
+
+      .footer {
+          background-color: #333;
+          color: #ffffff;
+          text-align: center;
+          padding: 15px;
+          font-size: 0.9em;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Notificación de incidencia</h1>
+    <h2 th:text="'El profesor ' + ${nombreProfesor} + ' ha reportado:'"></h2>
+  </div>
+  <div class="content">
+    <b><h2 th:utext="${contenido}"></h2></b>
+  </div>
+  <div class="footer">
+    <p>
+      El mensaje se ha enviado el dia: <span th:text="${horaDia} + ' hrs.'"></span><br>
+      Por favor no responda a este correo<br>
+      Si desea más información, por favor contacte con el profesor.
+    </p>
+  </div>
+</div>
+</body>
+</html>
