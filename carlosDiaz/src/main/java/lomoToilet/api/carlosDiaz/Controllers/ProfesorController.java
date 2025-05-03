@@ -2,7 +2,8 @@ package lomoToilet.api.carlosDiaz.Controllers;
 
 import lomoToilet.api.carlosDiaz.Dtos.LoginDto;
 import lomoToilet.api.carlosDiaz.Dtos.ProfesorDto;
-import lomoToilet.api.carlosDiaz.Dtos.UpdateProfesorDto;
+import lomoToilet.api.carlosDiaz.Dtos.UpdatePasswordDto;
+import lomoToilet.api.carlosDiaz.Dtos.UpdateProfesorContactDto;
 import lomoToilet.api.carlosDiaz.Models.Profesor;
 import lomoToilet.api.carlosDiaz.Services.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +39,34 @@ public class ProfesorController {
       );
       return ResponseEntity.ok(profesorDto);
     }).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+
   }
 
   @PostMapping("/create")
-  public void createProfesor(@RequestBody Profesor profesor) {
-    service.crearProfesor(profesor);
+  public ResponseEntity<String> createProfesor(@RequestBody Profesor profesor) {
+    try {
+      service.crearProfesor(profesor);
+      return ResponseEntity.ok("Profesor creado correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el profesor");
+    }
   }
 
-  @PutMapping("/update/{id}")
-  public ResponseEntity<String> updateProfesor(@PathVariable UUID id, @RequestBody UpdateProfesorDto updateProfesorDto) {
+  @PutMapping("/update-login/{id}")
+  public ResponseEntity<String> updateProfesor(@PathVariable UUID id, @RequestBody UpdateProfesorContactDto updateProfesorContactDto) {
     try {
-      service.updateProfesor(id, updateProfesorDto.getEmail(), updateProfesorDto.getTelefono());
-      return ResponseEntity.ok("Profesor actualizado correctamente");
+      service.actualizarProfesor(id, updateProfesorContactDto.getEmail(), updateProfesorContactDto.getTelefono());
+      return ResponseEntity.ok("E-mail y/o telefono actualizado correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+  }
+
+  @PutMapping("update-password/{id}")
+  public ResponseEntity<String> actualizarContrasena(@PathVariable UUID id, @RequestBody UpdatePasswordDto passwordDto) {
+    try {
+      service.actualizarContrasena(id, passwordDto.getContrasena());
+      return ResponseEntity.ok("Contraseña actualizada correctamente");
     } catch (RuntimeException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }

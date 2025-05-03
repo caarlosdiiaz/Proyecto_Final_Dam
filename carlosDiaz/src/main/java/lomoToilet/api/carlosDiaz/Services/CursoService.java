@@ -22,7 +22,7 @@ public class CursoService {
     return repository.save(curso);
   }
 
-  public Optional<List<Curso>> findAllCurso() {
-    return Optional.of(repository.findAll());
+  public List<Curso> findAllCurso() {
+    return repository.findAll();
   }
 }

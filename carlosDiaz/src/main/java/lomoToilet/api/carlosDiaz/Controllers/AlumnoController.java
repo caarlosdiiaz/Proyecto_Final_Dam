@@ -3,12 +3,10 @@ package lomoToilet.api.carlosDiaz.Controllers;
 import lomoToilet.api.carlosDiaz.Models.Alumno;
 import lomoToilet.api.carlosDiaz.Services.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -23,8 +21,13 @@ public class AlumnoController {
     return service.getAllAlumnos();
   }
 
+  @GetMapping("/{id}")
+  public Optional<Alumno> getAlumnoById(@RequestParam UUID id) {
+    return service.getAlumnoById(id);
+  }
+
   @PostMapping("/create")
-  public Alumno createAlumno(Alumno alumno) {
+  public Alumno createAlumno(@RequestBody Alumno alumno) {
     return service.createAlumno(alumno);
   }
 }

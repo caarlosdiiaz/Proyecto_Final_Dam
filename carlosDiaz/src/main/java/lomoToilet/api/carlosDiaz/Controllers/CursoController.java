@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,14 +21,13 @@ public class CursoController {
   }
 
   @GetMapping("/all")
-  public Optional<List<Curso>> getAll() {
+  public List<Curso> getAll() {
     return service.findAllCurso();
   }
 
   @GetMapping("/niveles-grupos")
   public Map<String, List<String>> getNivelesYGrupos() {
-    List<Curso> cursos = service.findAllCurso()
-        .orElseThrow(() -> new RuntimeException("No se encontraron cursos"));
+    List<Curso> cursos = service.findAllCurso();
 
     List<String> niveles = cursos.stream()
         .map(Curso::getNivel)

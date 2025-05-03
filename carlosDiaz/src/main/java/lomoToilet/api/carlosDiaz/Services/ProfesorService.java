@@ -69,10 +69,9 @@ public class ProfesorService {
     repository.save(profesor);
   }
 
-  public void updateProfesor(UUID id, String nuevoEmail, String nuevoTelefono) {
+  public void actualizarProfesor(UUID id, String nuevoEmail, String nuevoTelefono) {
     Profesor profesor = repository.findById(id).orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
 
-    // Verificar si el nuevo email o teléfono ya están en uso
     repository.findByEmail(crypt.encrypt(nuevoEmail)).ifPresent(p -> {
       if (!p.getId().equals(id)) {
         throw new RuntimeException("El email ya está en uso");
@@ -85,9 +84,22 @@ public class ProfesorService {
       }
     });
 
-    // Actualizar los datos
     profesor.setEmail(crypt.encrypt(nuevoEmail));
     profesor.setTelefono(crypt.encrypt(nuevoTelefono));
     repository.save(profesor);
+  }
+
+  public void actualizarContrasena(UUID id, String contrasena) {
+    if (contrasena == null || contrasena.length() < 8) {
+      throw new RuntimeException("La contraseña debe tener al menos 8 caracteres");
+    }
+
+    Profesor profesor = repository.findById(id).orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
+    try {
+      profesor.setContrasena(crypt.encrypt(contrasena));
+      repository.save(profesor);
+    } catch (Exception e) {
+      throw new RuntimeException("Error al actualizar la contraseña: " + e.getMessage());
+    }
   }
 }

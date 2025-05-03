@@ -1,6 +1,6 @@
 package lomoToilet.api.carlosDiaz.Dtos;
 
-public class UpdateProfesorDto {
+public class UpdateProfesorContactDto {
   private String email;
   private String telefono;
 
