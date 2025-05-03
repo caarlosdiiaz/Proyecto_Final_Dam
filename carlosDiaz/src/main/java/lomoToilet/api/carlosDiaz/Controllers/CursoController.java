@@ -1,5 +1,8 @@
 package lomoToilet.api.carlosDiaz.Controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lomoToilet.api.carlosDiaz.Models.Curso;
 import lomoToilet.api.carlosDiaz.Services.CursoService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +23,22 @@ public class CursoController {
     this.service = service;
   }
 
+  @Operation(summary = "Crear un nuevo profesor", description = "Registra un nuevo profesor en el sistema.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Profesor creado correctamente"),
+      @ApiResponse(responseCode = "400", description = "Error al crear el profesor"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
   @GetMapping("/all")
   public List<Curso> getAll() {
     return service.findAllCurso();
   }
 
+  @Operation(summary = "Obtener niveles y grupos", description = "Devuelve una lista de niveles y grupos únicos de los cursos.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Niveles y grupos obtenidos correctamente"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
   @GetMapping("/niveles-grupos")
   public Map<String, List<String>> getNivelesYGrupos() {
     List<Curso> cursos = service.findAllCurso();
@@ -42,6 +56,12 @@ public class CursoController {
     return Map.of("niveles", niveles, "grupos", grupos);
   }
 
+  @Operation(summary = "Crear un nuevo curso", description = "Registra un nuevo curso en el sistema.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Curso creado correctamente"),
+      @ApiResponse(responseCode = "400", description = "Error al crear el curso"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
   @PostMapping("/crear")
   public Curso crearCurso(Curso curso) {
     return service.crearCurso(curso);

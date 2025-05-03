@@ -1,5 +1,8 @@
 package lomoToilet.api.carlosDiaz.Controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lomoToilet.api.carlosDiaz.Models.EmailRequest;
 import lomoToilet.api.carlosDiaz.Services.EmailService;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,12 @@ public class EmailController {
     this.emailService = emailService;
   }
 
+  @Operation(summary = "Enviar un correo electrónico", description = "Envía un correo electrónico a dirección con un mensaje.")
+  @ApiResponses(value ={
+      @ApiResponse(responseCode = "200", description = "Correo electrónico enviado correctamente"),
+      @ApiResponse(responseCode = "400", description = "Error al enviar el correo electrónico"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
   @PostMapping("/enviar")
   public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
     try {
