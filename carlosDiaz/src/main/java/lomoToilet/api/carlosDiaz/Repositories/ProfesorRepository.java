@@ -10,7 +10,9 @@ import java.util.UUID;
 @Repository
 public interface ProfesorRepository extends JpaRepository<Profesor, UUID> {
 
-    Optional<Profesor> findByEmail(String email);
+  Optional<Profesor> findById(UUID id);
+
+  Optional<Profesor> findByEmail(String email);
 
   Optional<Profesor> findByTelefono(String telefono);
 }

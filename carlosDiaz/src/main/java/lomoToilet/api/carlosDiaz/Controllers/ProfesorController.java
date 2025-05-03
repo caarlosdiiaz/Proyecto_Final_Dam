@@ -2,6 +2,7 @@ package lomoToilet.api.carlosDiaz.Controllers;
 
 import lomoToilet.api.carlosDiaz.Dtos.LoginDto;
 import lomoToilet.api.carlosDiaz.Dtos.ProfesorDto;
+import lomoToilet.api.carlosDiaz.Dtos.UpdateProfesorDto;
 import lomoToilet.api.carlosDiaz.Models.Profesor;
 import lomoToilet.api.carlosDiaz.Services.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/profesores")
@@ -25,7 +27,7 @@ public class ProfesorController {
 
   @PostMapping("/login")
   public ResponseEntity<ProfesorDto> loginProfesor(@RequestBody LoginDto loginDto) {
-    Optional<Profesor> profesor = service.loginProfesor(loginDto.getEmail(), loginDto.getContrasena());
+    Optional<ProfesorDto> profesor = service.loginProfesor(loginDto.getEmail(), loginDto.getContrasena());
     return profesor.map(p -> {
       ProfesorDto profesorDto = new ProfesorDto(
           p.getNombre(),
@@ -41,5 +43,15 @@ public class ProfesorController {
   @PostMapping("/create")
   public void createProfesor(@RequestBody Profesor profesor) {
     service.crearProfesor(profesor);
+  }
+
+  @PutMapping("/update/{id}")
+  public ResponseEntity<String> updateProfesor(@PathVariable UUID id, @RequestBody UpdateProfesorDto updateProfesorDto) {
+    try {
+      service.updateProfesor(id, updateProfesorDto.getEmail(), updateProfesorDto.getTelefono());
+      return ResponseEntity.ok("Profesor actualizado correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
   }
 }
