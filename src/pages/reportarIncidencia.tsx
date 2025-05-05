@@ -8,7 +8,6 @@ import {
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-// import { sendEmail } from "../helpers/sendEmail";
 import { Profesor } from "../templates/interfaces templates";
 import { sendEmail } from "../helpers/sendEmail";
 
@@ -35,8 +34,14 @@ function ReportarIncidencia() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (profesor) {
-      await sendEmail(`${profesor.nombre} ${profesor.apellidos}`, contenido);
-      alert(`El profesor ${profesor.nombre} ha enviado un mail.`);
+      if(contenido.trim().length === 0) {
+        alert("El contenido no puede estar vacío.");
+        return;
+      }
+      else {
+        await sendEmail(`${profesor.nombre} ${profesor.apellidos}`, contenido);
+        alert(`El profesor ${profesor.nombre} ha enviado un mail.`);
+      }
     } else {
       alert("No se encontró información del profesor.");
     }

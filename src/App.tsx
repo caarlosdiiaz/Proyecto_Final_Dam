@@ -34,6 +34,7 @@ import Ayuda from "./pages/ayuda"
 import DatosPersonales from "./pages/datosPersonales";;
 import HacerInforme from "./pages/hacerInforme";
 import ReportarIncidencia from "./pages/reportarIncidencia"
+import PanelAdmin from "./pages/panelAdmin";
 
 setupIonicReact();
 
@@ -89,6 +90,16 @@ const App: React.FC = () => {
               <IonRouterOutlet id="main">
                 <Route path="/report/issue" exact>
                   <ReportarIncidencia />
+                </Route>
+              </IonRouterOutlet>
+            </IonSplitPane>
+          </Route>
+          <Route path="/adminPane" exact>
+            <IonSplitPane contentId="main">
+              <Menu />
+              <IonRouterOutlet id="main">
+                <Route path="/adminPane" exact>
+                  <PanelAdmin />
                 </Route>
               </IonRouterOutlet>
             </IonSplitPane>

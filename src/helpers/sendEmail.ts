@@ -1,4 +1,9 @@
 export async function sendEmail(nombreProfesor: string, contenido: string): Promise<void>{
+  if (contenido.trim().length === 0) {
+    alert("El contenido no puede estar vacío.");
+    return;
+  }
+  
   fetch("http://localhost:8080/api/email/enviar", {
     method: "POST",
     headers: {

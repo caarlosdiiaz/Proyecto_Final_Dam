@@ -14,8 +14,9 @@ import { Alumno } from "../templates/interfaces templates";
 import TableComponent from "../components/mainPage/tableComponent";
 
 import { Profesor } from "../templates/interfaces templates";
+import SubmitButton from '../components/mainPage/submitButton';
 
-const API_URL = "http://localhost:8080/api/cursos/niveles-grupos"; // URL movida fuera del método
+const API_URL = "http://localhost:8080/api/cursos/niveles-grupos";
 
 const Page: React.FC = () => {
   const [niveles, setNiveles] = useState<string[]>([]);
@@ -24,7 +25,7 @@ const Page: React.FC = () => {
   const [selectedGrupo, setSelectedGrupo] = useState<string | null>(null);
   const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null);
   const history = useHistory();
-  const [profesor, setProfesor] = useState<Profesor | null>(null);
+  const [profesor, setProfesor] = useState<Profesor>();
 
   const handleAlumnoSelect = (alumno: Alumno) => {
     setSelectedAlumno(alumno);
@@ -149,6 +150,7 @@ const Page: React.FC = () => {
               <p>
                 {selectedAlumno.nombre} {selectedAlumno.apellidos}
               </p>
+              <SubmitButton profesorId={profesor.id} alumnoId={selectedAlumno.id} />
             </div>
           )}
         </div>

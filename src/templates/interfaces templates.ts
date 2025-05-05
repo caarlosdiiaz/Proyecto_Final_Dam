@@ -4,8 +4,7 @@ export interface Profesor {
   apellidos: string;
   email: string;
   telefono: string;
-  contrasena: string;
-  tipo: string;
+  admin: boolean;
 }
 
 export interface Curso {
@@ -19,6 +18,7 @@ export interface Alumno {
   id: string;
   nombre: string;
   apellidos: string;
+  numeroLista:number;
   repetidor: boolean;
   cursoId: number;
 }

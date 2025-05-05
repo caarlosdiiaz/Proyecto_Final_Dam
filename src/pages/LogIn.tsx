@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       email: email.trim(),
       contrasena: password.trim(),
     };
-  
+
     fetch("http://localhost:8080/api/profesores/login", {
       method: "POST",
       headers: {
@@ -46,7 +46,8 @@ const Login: React.FC = () => {
       .then((response) => {
         if (!response.ok) {
           return response.json().then((error) => {
-            throw new Error(error.message || "Error en la autenticación");
+            console.log(error);
+            throw new Error("Error en la autenticación");
           });
         }
         return response.json();
@@ -58,7 +59,7 @@ const Login: React.FC = () => {
       .catch((error) => {
         console.error("Error:", error);
         alert(
-          error.message || "Error en la autenticación. Por favor, verifica tus credenciales."
+          "Error en la autenticación. Por favor, verifica tus credenciales."
         );
       });
   };
@@ -78,7 +79,7 @@ const Login: React.FC = () => {
                 style={{ height: "410px" }}
               >
                 <img
-                  src={isDarkMode ? moonSharp : sunnySharp}
+                  src={isDarkMode ? sunnySharp : moonSharp}
                   alt={isDarkMode ? "Light mode icon" : "Dark mode icon"}
                   onClick={toggleTheme}
                   style={{ cursor: "pointer", width: "30px", height: "30px", right: "18px", position: "absolute", top: "18px" }}

@@ -56,6 +56,7 @@ function TableComponent({
           <IonCol>
             {nivel} {grupo}
           </IonCol>
+          <IonCol>{alumno.numeroLista}</IonCol>
           <IonCol>{alumno.repetidor ? "Sí" : "No"}</IonCol>
         </IonRow>
       ))}
