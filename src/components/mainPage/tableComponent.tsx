@@ -43,6 +43,7 @@ function TableComponent({
         <IonCol>Nombre</IonCol>
         <IonCol>Apellidos</IonCol>
         <IonCol>Curso</IonCol>
+        <IonCol>Número de lista</IonCol>
         <IonCol>Repetidor</IonCol>
       </IonRow>
       {alumnos.map((alumno) => (
@@ -54,9 +55,9 @@ function TableComponent({
           <IonCol>{alumno.nombre}</IonCol>
           <IonCol>{alumno.apellidos}</IonCol>
           <IonCol>
-            {nivel} {grupo}
+            {nivel} - {grupo}
           </IonCol>
-          <IonCol>{alumno.numeroLista}</IonCol>
+          <IonCol>{alumno.numLista}</IonCol>
           <IonCol>{alumno.repetidor ? "Sí" : "No"}</IonCol>
         </IonRow>
       ))}

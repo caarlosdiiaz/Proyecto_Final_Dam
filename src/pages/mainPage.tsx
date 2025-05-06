@@ -16,8 +16,6 @@ import TableComponent from "../components/mainPage/tableComponent";
 import { Profesor } from "../templates/interfaces templates";
 import SubmitButton from '../components/mainPage/submitButton';
 
-const API_URL = "http://localhost:8080/api/cursos/niveles-grupos";
-
 const Page: React.FC = () => {
   const [niveles, setNiveles] = useState<string[]>([]);
   const [grupos, setGrupos] = useState<string[]>([]);
@@ -44,7 +42,7 @@ const Page: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch("http://localhost:8080/api/cursos/levels-groups");
         if (!response.ok) {
           throw new Error("Error al obtener los datos");
         }

@@ -3,8 +3,8 @@ export async function sendEmail(nombreProfesor: string, contenido: string): Prom
     alert("El contenido no puede estar vacío.");
     return;
   }
-  
-  fetch("http://localhost:8080/api/email/enviar", {
+
+  fetch("http://localhost:8080/api/email/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

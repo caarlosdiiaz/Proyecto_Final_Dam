@@ -3,6 +3,7 @@ import {
   IonGrid,
   IonHeader,
   IonInput,
+  IonInputPasswordToggle,
   IonLabel,
   IonPage,
   IonTitle,
@@ -54,6 +55,10 @@ function DatosPersonales() {
     if (e === "contrasenaConfirmar") {
       setContrasenaConfirmar(valor);
     }
+  }
+
+  const actualizarVentana = () => {
+    window.location.reload();
   }
 
   const guardarCambios = () => {
@@ -170,15 +175,22 @@ function DatosPersonales() {
                     <IonLabel>Nueva contraseña: </IonLabel>
                     <IonInput
                     className="form-control ps-3"
+                    type="password"
+                    placeholder="Contraseña"
                     onIonInput={(e) => actualizar("contrasena", e.detail.value!)}
-                  ></IonInput>
+                  >
+                    <IonInputPasswordToggle slot="end" />
+                  </IonInput>
                   </IonGrid>
                   <IonGrid className="mb-3">
                     <IonLabel>Confirmar contraseña: </IonLabel>
                     <IonInput
                       className="form-control ps-3"
+                      placeholder="Confirmar contraseña"
                       onIonInput={(e) => actualizar("contrasenaConfirmar", e.detail.value!)}
-                      ></IonInput>
+                    >
+                      <IonInputPasswordToggle slot="end" />
+                    </IonInput>
                   </IonGrid>
                 </IonGrid>
               </div>
@@ -192,7 +204,12 @@ function DatosPersonales() {
               >
               Guardar cambios
             </button>
-            <button className="btn btn-danger mt-3 px-4">Cancelar</button>
+            <button
+              className="btn btn-danger mt-3 px-4"
+              onClick={actualizarVentana}
+            >
+              Cancelar
+            </button>
           </div>
         </div>
       </IonContent>

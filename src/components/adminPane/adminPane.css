@@ -1,0 +1,25 @@
+.list-group-horizontal {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.list-item {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-right: 1px solid #ccc;
+}
+
+.list-item:last-child {
+  border-right: none;
+}
+
+.list-item:hover {
+  background-color: #e0e0e0;
+}
+
+body.dark .list-item:hover {
+  background-color: #555;
+}

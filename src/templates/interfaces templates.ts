@@ -18,7 +18,7 @@ export interface Alumno {
   id: string;
   nombre: string;
   apellidos: string;
-  numeroLista:number;
+  numLista:number;
   repetidor: boolean;
   cursoId: number;
 }
