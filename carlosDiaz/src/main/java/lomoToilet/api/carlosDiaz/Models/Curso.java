@@ -2,6 +2,8 @@ package lomoToilet.api.carlosDiaz.Models;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "cursos")
 public class Curso {
@@ -18,12 +20,12 @@ public class Curso {
   private Character grupo;
 
   @Column(name = "tutor_id", nullable = false)
-  private Long tutorId;
+  private UUID tutorId;
 
   public Curso() {
   }
 
-  public Curso(String nivel, Character grupo, Long tutorId) {
+  public Curso(String nivel, Character grupo, UUID tutorId) {
     this.nivel = nivel;
     this.grupo = grupo;
     this.tutorId = tutorId;
@@ -53,11 +55,11 @@ public class Curso {
     this.grupo = grupo;
   }
 
-  public Long getTutorId() {
+  public UUID getTutorId() {
     return tutorId;
   }
 
-  public void setTutorId(Long tutorId) {
+  public void setTutorId(UUID tutorId) {
     this.tutorId = tutorId;
   }
 }

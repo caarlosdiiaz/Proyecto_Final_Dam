@@ -50,4 +50,18 @@ public class AlumnoController {
   public Alumno createAlumno(@RequestBody Alumno alumno) {
     return service.createAlumno(alumno);
   }
+
+  @Operation(summary = "Obtener alumnos por curso y grupo", description = "Devuelve una lista de alumnos filtrados por curso y grupo.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Alumnos encontrados"),
+      @ApiResponse(responseCode = "404", description = "No se encontró el grupo especificado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @GetMapping("/curso")
+  public List<Alumno> getAlumnosByCursoAndGrupo(@RequestParam String nivel, @RequestParam String grupo) {
+    if (grupo.length() != 1) {
+      throw new IllegalArgumentException("El parámetro 'grupo' debe ser un único carácter.");
+    }
+    return service.getAlumnosByNivelAndGrupo(nivel, grupo.charAt(0));
+  }
 }

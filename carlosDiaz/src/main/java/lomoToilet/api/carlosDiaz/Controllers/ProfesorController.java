@@ -45,15 +45,15 @@ public class ProfesorController {
     Optional<ProfesorDto> profesor = service.loginProfesor(loginDto.getEmail(), loginDto.getContrasena());
     return profesor.map(p -> {
       ProfesorDto profesorDto = new ProfesorDto(
+          p.getId(),
           p.getNombre(),
           p.getApellidos(),
           p.getEmail(),
           p.getTelefono(),
-          p.getTipo()
+          p.isAdmin()
       );
       return ResponseEntity.ok(profesorDto);
     }).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-
   }
 
   @Operation(summary = "Crear un nuevo profesor", description = "Registra un nuevo profesor en el sistema.")

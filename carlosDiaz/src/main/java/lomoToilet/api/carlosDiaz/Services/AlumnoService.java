@@ -26,4 +26,8 @@ public class AlumnoService {
   public Alumno createAlumno(Alumno alumno) {
     return repository.save(alumno);
   }
+
+  public List<Alumno> getAlumnosByNivelAndGrupo(String nivel, Character grupo) {
+    return repository.findAlumnosByNivelAndGrupo(nivel, grupo);
+  }
 }

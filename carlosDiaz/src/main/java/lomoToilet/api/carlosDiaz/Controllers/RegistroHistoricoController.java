@@ -23,7 +23,7 @@ public class RegistroHistoricoController {
       @ApiResponse(responseCode = "400", description = "Error al crear el registro histórico"),
       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
   })
-  @PostMapping("/crear")
+  @PostMapping("/create")
   public RegistroHistorico crearRegistro(RegistroHistorico registroh) {
     return service.saveRegistro(registroh);
   }

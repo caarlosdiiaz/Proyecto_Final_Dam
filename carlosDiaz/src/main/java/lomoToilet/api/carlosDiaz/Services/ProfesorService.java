@@ -41,11 +41,12 @@ public class ProfesorService {
       String telefonoDesencriptado = crypt.decrypt(profesor.getTelefono());
 
       return new ProfesorDto(
+          profesor.getId(),
           profesor.getNombre(),
           profesor.getApellidos(),
           emailDesencriptado,
           telefonoDesencriptado,
-          profesor.getTipo()
+          profesor.isAdmin()
       );
     });
   }

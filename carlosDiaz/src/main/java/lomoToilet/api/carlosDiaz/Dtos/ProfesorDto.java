@@ -1,22 +1,34 @@
 package lomoToilet.api.carlosDiaz.Dtos;
 
+import java.util.UUID;
+
 public class ProfesorDto {
 
+  private UUID id;
   private String nombre;
   private String apellidos;
   private String email;
   private String telefono;
-  private String tipo;
+  private boolean admin;
 
   public ProfesorDto() {
   }
 
-  public ProfesorDto(String nombre, String apellidos, String email, String telefono, String tipo) {
+  public ProfesorDto(UUID id, String nombre, String apellidos, String email, String telefono, boolean admin) {
+    this.id = id;
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.email = email;
     this.telefono = telefono;
-    this.tipo = tipo;
+    this.admin = admin;
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public String getNombre() {
@@ -51,11 +63,11 @@ public class ProfesorDto {
     this.telefono = telefono;
   }
 
-  public String getTipo() {
-    return tipo;
+  public boolean isAdmin() {
+    return admin;
   }
 
-  public void setTipo(String tipo) {
-    this.tipo = tipo;
+  public void setAdmin(boolean admin) {
+    this.admin = admin;
   }
 }

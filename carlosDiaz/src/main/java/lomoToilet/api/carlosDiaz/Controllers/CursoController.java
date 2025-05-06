@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lomoToilet.api.carlosDiaz.Models.Curso;
 import lomoToilet.api.carlosDiaz.Services.CursoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -39,7 +36,7 @@ public class CursoController {
       @ApiResponse(responseCode = "200", description = "Niveles y grupos obtenidos correctamente"),
       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
   })
-  @GetMapping("/niveles-grupos")
+  @GetMapping("/levels-groups")
   public Map<String, List<String>> getNivelesYGrupos() {
     List<Curso> cursos = service.findAllCurso();
 
@@ -62,8 +59,8 @@ public class CursoController {
       @ApiResponse(responseCode = "400", description = "Error al crear el curso"),
       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
   })
-  @PostMapping("/crear")
-  public Curso crearCurso(Curso curso) {
+  @PostMapping("/create")
+  public Curso crearCurso(@RequestBody  Curso curso) {
     return service.crearCurso(curso);
   }
 }

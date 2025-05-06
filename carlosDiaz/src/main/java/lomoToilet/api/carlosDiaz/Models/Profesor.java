@@ -32,19 +32,19 @@ public class Profesor {
   @Column(name = "contrasena", nullable = false, columnDefinition = "TEXT")
   private String contrasena;
 
-  @Column(name = "tipo", nullable = false)
-  private String tipo;
+  @Column(name = "admin", nullable = false)
+  private boolean admin;
 
   public Profesor() {
   }
 
-  public Profesor(String nombre, String apellidos, String email, String telefono, String contrasena, String tipo) {
+  public Profesor(String nombre, String apellidos, String email, String telefono, String contrasena, boolean admin) {
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.email = email;
     this.telefono = telefono;
     this.contrasena = contrasena;
-    this.tipo = tipo;
+    this.admin = admin;
   }
 
   public UUID getId() {
@@ -95,11 +95,11 @@ public class Profesor {
     this.contrasena = contrasena;
   }
 
-  public String getTipo() {
-    return tipo;
+  public boolean isAdmin() {
+    return admin;
   }
 
-  public void setTipo(String tipo) {
-    this.tipo = tipo;
+  public void setAdmin(boolean admin) {
+    this.admin = admin;
   }
 }

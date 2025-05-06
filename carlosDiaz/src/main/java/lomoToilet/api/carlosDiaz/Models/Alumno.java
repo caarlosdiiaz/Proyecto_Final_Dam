@@ -26,7 +26,7 @@ public class Alumno {
   @Column(name = "num_lista", nullable = false)
   private Integer numLista;
 
-  @Column(name = "repetidor", nullable = false)
+  @Column(name = "repetidor", nullable = true, columnDefinition = "BOOLEAN DEFAULT FALSE")
   private Boolean repetidor;
 
   @Column(name = "curso_id", nullable = false)

@@ -25,7 +25,7 @@ public class EmailController {
       @ApiResponse(responseCode = "400", description = "Error al enviar el correo electrónico"),
       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
   })
-  @PostMapping("/enviar")
+  @PostMapping("/send")
   public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
     try {
       emailService.setProfesor(emailRequest.getProfesor());

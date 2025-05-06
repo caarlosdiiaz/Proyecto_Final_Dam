@@ -23,7 +23,7 @@ public class RegistroController {
       @ApiResponse(responseCode = "400", description = "Error al crear el registro"),
       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
   })
-  @PostMapping("/crear")
+  @PostMapping("/create")
   public Registro crearRegistro(Registro registro) {
     return service.saveRegistro(registro);
   }
