@@ -25,4 +25,15 @@ public class CursoService {
   public List<Curso> findAllCurso() {
     return repository.findAll();
   }
+
+  public void deleteCursoById(Long id) {
+    if (!repository.existsById(id)) {
+      throw new RuntimeException("Curso no encontrado");
+    }
+    repository.deleteById(id);
+  }
+
+  public void deleteAllCursos() {
+    repository.deleteAll();
+  }
 }

@@ -40,6 +40,17 @@ public class AlumnoController {
     return service.getAlumnoById(id);
   }
 
+  @Operation(summary = "Obtener Todos los alumnos de un curso", description = "Devuelve una lista de alumnos por su ID de curso.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Alumnos encontrados"),
+      @ApiResponse(responseCode = "404", description = "No se encontró el curso especificado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @GetMapping("/curso/{id}")
+  public List<Alumno> getAlumnosByCurso(@PathVariable Long id) {
+    return service.getAlumnosByCurso(id);
+  }
+
   @Operation(summary = "Crear un alumno", description = "Crea un nuevo alumno.")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Alumno actualizado correctamente"),
@@ -63,5 +74,27 @@ public class AlumnoController {
       throw new IllegalArgumentException("El parámetro 'grupo' debe ser un único carácter.");
     }
     return service.getAlumnosByNivelAndGrupo(nivel, grupo.charAt(0));
+  }
+
+  @Operation(summary = "Eliminar un alumno", description = "Elimina un alumno por su ID.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Alumno eliminado correctamente"),
+      @ApiResponse(responseCode = "404", description = "Alumno no encontrado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/delete/{id}")
+  public boolean deleteAlumno(@PathVariable UUID id) {
+    return service.deleteAlumno(id);
+  }
+
+  @Operation(summary = "Eliminar todos los alumnos de un curso", description = "Elimina todos los alumnos asociados a un curso por su ID.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Alumnos eliminados correctamente"),
+      @ApiResponse(responseCode = "404", description = "Curso no encontrado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/deleteall/curso/{id}")
+  public void deleteAllAlumnosByCurso(@PathVariable Long id) {
+    service.deleteAlumnosByCurso(id);
   }
 }

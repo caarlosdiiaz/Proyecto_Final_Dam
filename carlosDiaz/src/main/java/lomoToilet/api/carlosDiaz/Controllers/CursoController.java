@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lomoToilet.api.carlosDiaz.Models.Curso;
 import lomoToilet.api.carlosDiaz.Services.CursoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,5 +64,36 @@ public class CursoController {
   @PostMapping("/create")
   public Curso crearCurso(@RequestBody  Curso curso) {
     return service.crearCurso(curso);
+  }
+
+  @Operation(summary = "Eliminar un curso por ID", description = "Elimina un curso específico por su ID.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Curso eliminado correctamente"),
+      @ApiResponse(responseCode = "404", description = "Curso no encontrado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> deleteCursoById(@PathVariable Long id) {
+    try {
+      service.deleteCursoById(id);
+      return ResponseEntity.ok("Curso eliminado correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+  }
+
+  @Operation(summary = "Eliminar todos los cursos", description = "Elimina todos los cursos registrados en el sistema.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Todos los cursos eliminados correctamente"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<String> deleteAllCursos() {
+    try {
+      service.deleteAllCursos();
+      return ResponseEntity.ok("Todos los cursos eliminados correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar los cursos");
+    }
   }
 }

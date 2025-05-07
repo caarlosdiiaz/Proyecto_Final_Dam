@@ -4,6 +4,7 @@ import lomoToilet.api.carlosDiaz.Models.Alumno;
 import lomoToilet.api.carlosDiaz.Repositories.AlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +30,22 @@ public class AlumnoService {
 
   public List<Alumno> getAlumnosByNivelAndGrupo(String nivel, Character grupo) {
     return repository.findAlumnosByNivelAndGrupo(nivel, grupo);
+  }
+
+  public List<Alumno> getAlumnosByCurso(Long id) {
+    return repository.findAlumnosByCurso(id);
+  }
+
+  public boolean deleteAlumno(UUID id) {
+    if (repository.existsById(id)) {
+      repository.deleteById(id);
+      return true;
+    }
+    return false;
+  }
+
+  @Transactional
+  public void deleteAlumnosByCurso(Long id) {
+    repository.deleteAlumnosByCurso(id);
   }
 }

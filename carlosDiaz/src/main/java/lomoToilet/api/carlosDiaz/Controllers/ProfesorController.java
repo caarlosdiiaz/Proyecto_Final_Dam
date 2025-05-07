@@ -103,4 +103,35 @@ public class ProfesorController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
   }
+
+  @Operation(summary = "Eliminar un profesor por ID", description = "Elimina un profesor específico por su ID.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Profesor eliminado correctamente"),
+      @ApiResponse(responseCode = "404", description = "Profesor no encontrado"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> deleteProfesor(@PathVariable UUID id) {
+    try {
+      service.deleteProfesorById(id);
+      return ResponseEntity.ok("Profesor eliminado correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+  }
+
+  @Operation(summary = "Eliminar todos los profesores", description = "Elimina todos los profesores registrados en el sistema.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Todos los profesores eliminados correctamente"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<String> deleteAllProfesores() {
+    try {
+      service.deleteAllProfesores();
+      return ResponseEntity.ok("Todos los profesores eliminados correctamente");
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar los profesores");
+    }
+  }
 }

@@ -103,4 +103,15 @@ public class ProfesorService {
       throw new RuntimeException("Error al actualizar la contraseña: " + e.getMessage());
     }
   }
+
+  public void deleteProfesorById(UUID id) {
+    if (!repository.existsById(id)) {
+      throw new RuntimeException("Profesor no encontrado");
+    }
+    repository.deleteById(id);
+  }
+
+  public void deleteAllProfesores() {
+    repository.deleteAll();
+  }
 }
