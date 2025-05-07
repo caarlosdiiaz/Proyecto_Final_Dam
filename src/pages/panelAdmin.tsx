@@ -6,25 +6,41 @@ import "../components/adminPane/adminPane.css";
 import CreateProfesor from "../components/adminPane/createProfesor";
 import CreateCurso from "../components/adminPane/createCurso";
 import CreateAlumno from "../components/adminPane/createAlumno";
+import DeleteAlumnos from '../components/adminPane/deleteAlumnos';
+import DeleteProfesores from "../components/adminPane/deleteProfesores";
+import DeleteCurso from "../components/adminPane/deleteCurso";
 
 function PanelAdmin() {
   const history = useHistory();
   const [profesor, setProfesor] = useState<Profesor>();
   const [selectedTab, setSelectedTab] = useState<string>("");
   const tabs = [
-    { name: "Alumnos" },
-    { name: "Profesores" },
-    { name: "Cursos" },
+    { name: "Crear Alumnos" },
+    { name: "Crear Profesores" },
+    { name: "Crear Cursos" },
+    { name: "Eliminar Alumnos" },
+    { name: "Eliminar Profesores" },
+    { name: "Eliminar Cursos" },
   ];
+
   const pageToLoad = (pagina: string) => {
-    if (pagina === "Alumnos") {
-      setSelectedTab("Alumnos");
+    if (pagina === "Crear Alumnos") {
+      setSelectedTab("Crear Alumnos");
     }
-    if (pagina === "Profesores") {
-      setSelectedTab("Profesores");
+    if (pagina === "Crear Profesores") {
+      setSelectedTab("Crear Profesores");
     }
-    if (pagina === "Cursos") {
-      setSelectedTab("Cursos");
+    if (pagina === "Crear Cursos") {
+      setSelectedTab("Crear Cursos");
+    }
+    if (pagina === "Eliminar Alumnos") {
+      setSelectedTab("Eliminar Alumnos");
+    }
+    if (pagina === "Eliminar Profesores") {
+      setSelectedTab("Eliminar Profesores");
+    }
+    if (pagina === "Eliminar Cursos") {
+      setSelectedTab("Eliminar Cursos");
     }
     if (pagina === "") {
       setSelectedTab("");
@@ -69,9 +85,12 @@ function PanelAdmin() {
               </li>
             ))}
           </ul>
-          {selectedTab === "Profesores" && <CreateProfesor />}
-          {selectedTab === "Cursos" && <CreateCurso />}
-          {selectedTab === "Alumnos" && <CreateAlumno />}
+          {selectedTab === "Crear Profesores" && <CreateProfesor />}
+          {selectedTab === "Crear Cursos" && <CreateCurso />}
+          {selectedTab === "Crear Alumnos" && <CreateAlumno />}
+          {selectedTab === "Eliminar Alumnos" && <DeleteAlumnos />}
+          {selectedTab === "Eliminar Profesores" && <DeleteProfesores />}
+          {selectedTab === "Eliminar Cursos" && <DeleteCurso />}
         </div>
       </IonContent>
     </IonPage>
