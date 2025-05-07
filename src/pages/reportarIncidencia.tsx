@@ -49,12 +49,10 @@ function ReportarIncidencia() {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonTitle>
-            <b><h1>
-              Reportar Incidencia
-            </h1></b>
+            <h1>Reportar Incidencia</h1>
           </IonTitle>
         </IonToolbar>
       </IonHeader>

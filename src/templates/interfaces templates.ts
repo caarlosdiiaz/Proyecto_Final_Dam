@@ -36,3 +36,10 @@ export interface RegistroHistorico {
   profesorId: string;
   fecha: string;
 }
+
+export interface registrosDataAlumnos {
+  curso: string;
+  alumnoId: string;
+  cantidad: number;
+  nombre: string;
+}

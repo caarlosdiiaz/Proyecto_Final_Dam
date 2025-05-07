@@ -63,11 +63,10 @@ function PanelAdmin() {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonTitle>
           <h1>
-            Bienvenido al panel de amdinistrador, {profesor?.nombre}{" "}
-            {profesor?.apellidos}
+            Bienvenido al panel de amdinistrador, {profesor?.nombre} {profesor?.apellidos}
           </h1>
         </IonTitle>
       </IonHeader>

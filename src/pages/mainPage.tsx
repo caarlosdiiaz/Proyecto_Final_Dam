@@ -68,7 +68,7 @@ const Page: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonTitle>
           <h1>
             Bienvenido, {profesor.nombre} {profesor.apellidos}

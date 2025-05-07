@@ -14,7 +14,6 @@ import {
   homeSharp,
   readerSharp,
   buildSharp,
-  helpSharp,
   powerSharp,
   alertSharp,
   moonSharp,
@@ -38,11 +37,6 @@ const appPages: AppPage[] = [
     url: "/home",
     iosIcon: homeSharp,
     mdIcon: homeSharp,
-  },{
-    title: "Ayuda",
-    url: "/help",
-    iosIcon: helpSharp,
-    mdIcon: helpSharp,
   },
   {
     title: "Cambiar datos personales",

@@ -7,7 +7,6 @@ import {
   IonLabel,
   IonPage,
   IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import { Profesor } from "../templates/interfaces templates";
 import { useEffect, useState } from "react";
@@ -115,15 +114,13 @@ function DatosPersonales() {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
+      <IonHeader translucent={false}>
           <IonTitle>
             <h1>
               Cambiar datos personales de: {profesor?.nombre}{" "}
               {profesor?.apellidos}
             </h1>
           </IonTitle>
-        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <div className="container mt-5">

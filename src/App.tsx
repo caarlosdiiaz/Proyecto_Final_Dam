@@ -30,7 +30,6 @@ import "./theme/variables.css";
 import Menu from "./components/mainPage/Menu";
 import Page from "./pages/mainPage";
 import Login from "./pages/LogIn";
-import Ayuda from "./pages/ayuda"
 import DatosPersonales from "./pages/datosPersonales";;
 import HacerInforme from "./pages/hacerInforme";
 import ReportarIncidencia from "./pages/reportarIncidencia"
@@ -50,16 +49,6 @@ const App: React.FC = () => {
               <IonRouterOutlet id="main">
                 <Route path="/home" exact>
                   <Page />
-                </Route>
-              </IonRouterOutlet>
-            </IonSplitPane>
-          </Route>
-          <Route path="/help" exact>
-            <IonSplitPane contentId="main">
-              <Menu />
-              <IonRouterOutlet id="main">
-                <Route path="/help" exact>
-                  <Ayuda />
                 </Route>
               </IonRouterOutlet>
             </IonSplitPane>
