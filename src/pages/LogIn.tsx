@@ -66,7 +66,7 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding bg-gradient">
+      <IonContent className="ion-padding bg-gradient">
         <IonGrid className="h-100">
           <IonRow className="justify-content-center align-items-center h-100">
             <IonCol sizeMd="5" sizeLg="4" className="d-none d-md-block">

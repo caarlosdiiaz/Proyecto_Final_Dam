@@ -19,13 +19,14 @@ function HacerInforme() {
           <h1>Hacer informes</h1>
         </IonTitle>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <div className="container mt-2">
           <div className="row">
-            <div className="col-4">
+            {/* Calendar Section */}
+            <div className="col-12 col-lg-4 mb-3">
               <h2>Seleccionar Fechas</h2>
               <div className="form-group form-control-sm">
-              <DateRangeSelector onDatesSelected={handleDatesSelected} />
+                <DateRangeSelector onDatesSelected={handleDatesSelected} />
               </div>
               <div>
                 <h3>Fechas Seleccionadas</h3>
@@ -33,7 +34,9 @@ function HacerInforme() {
                 <p>Fecha Fin: {fechaFin || "No seleccionada"}</p>
               </div>
             </div>
-            <div className="col-7 ms-1">
+
+            {/* Preview Table Section */}
+            <div className="col-12 col-lg-7 ms-lg-1">
               <h2>Previsualización</h2>
               <PreviewTable fechaInicio={fechaInicio} fechaFin={fechaFin} />
             </div>

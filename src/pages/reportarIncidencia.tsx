@@ -57,7 +57,7 @@ function ReportarIncidencia() {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent>
         <div className="container mt-5">
           <h2>Rellene aquí el formulario para reportar una incidencia:</h2>
           <form className="mt-4" onSubmit={handleSubmit}>

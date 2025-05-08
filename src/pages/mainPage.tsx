@@ -68,7 +68,7 @@ const Page: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader translucent={false}>
+      <IonHeader>
         <IonTitle>
           <h1>
             Bienvenido, {profesor.nombre} {profesor.apellidos}
@@ -76,7 +76,7 @@ const Page: React.FC = () => {
         </IonTitle>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent>
         <div className="container mt-4">
           <IonAccordionGroup>
             <IonAccordion

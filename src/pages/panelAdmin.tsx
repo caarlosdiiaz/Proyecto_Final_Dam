@@ -6,7 +6,7 @@ import "../components/adminPane/adminPane.css";
 import CreateProfesor from "../components/adminPane/createProfesor";
 import CreateCurso from "../components/adminPane/createCurso";
 import CreateAlumno from "../components/adminPane/createAlumno";
-import DeleteAlumnos from '../components/adminPane/deleteAlumnos';
+import DeleteAlumnos from "../components/adminPane/deleteAlumnos";
 import DeleteProfesores from "../components/adminPane/deleteProfesores";
 import DeleteCurso from "../components/adminPane/deleteCurso";
 
@@ -24,27 +24,7 @@ function PanelAdmin() {
   ];
 
   const pageToLoad = (pagina: string) => {
-    if (pagina === "Crear Alumnos") {
-      setSelectedTab("Crear Alumnos");
-    }
-    if (pagina === "Crear Profesores") {
-      setSelectedTab("Crear Profesores");
-    }
-    if (pagina === "Crear Cursos") {
-      setSelectedTab("Crear Cursos");
-    }
-    if (pagina === "Eliminar Alumnos") {
-      setSelectedTab("Eliminar Alumnos");
-    }
-    if (pagina === "Eliminar Profesores") {
-      setSelectedTab("Eliminar Profesores");
-    }
-    if (pagina === "Eliminar Cursos") {
-      setSelectedTab("Eliminar Cursos");
-    }
-    if (pagina === "") {
-      setSelectedTab("");
-    }
+    setSelectedTab(pagina);
   };
 
   useEffect(() => {
@@ -65,31 +45,43 @@ function PanelAdmin() {
     <IonPage>
       <IonHeader translucent={false}>
         <IonTitle>
-          <h1>
-            Bienvenido al panel de amdinistrador, {profesor?.nombre} {profesor?.apellidos}
+          <h1 className="text-center">
+            Bienvenido al panel de administrador, {profesor?.nombre} {profesor?.apellidos}
           </h1>
         </IonTitle>
       </IonHeader>
 
-      <IonContent fullscreen>
-        <div className="container mt-5 ms-3">
-          <ul className="list-group-horizontal">
-            {tabs.map((tab, index) => (
-              <li
-                key={index}
-                className="list-item"
-                onClick={() => pageToLoad(tab.name)}
-              >
-                {tab.name}
-              </li>
-            ))}
-          </ul>
-          {selectedTab === "Crear Profesores" && <CreateProfesor />}
-          {selectedTab === "Crear Cursos" && <CreateCurso />}
-          {selectedTab === "Crear Alumnos" && <CreateAlumno />}
-          {selectedTab === "Eliminar Alumnos" && <DeleteAlumnos />}
-          {selectedTab === "Eliminar Profesores" && <DeleteProfesores />}
-          {selectedTab === "Eliminar Cursos" && <DeleteCurso />}
+      <IonContent>
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <ul className="list-group list-group-horizontal-md flex-wrap">
+              {tabs.map((tab, index) => (
+                <li
+                  key={index}
+                  className={`list-item p-2 m-1 text-center ${
+                    selectedTab === tab.name ? "active-tab" : ""
+                  }`}
+                  onClick={() => pageToLoad(tab.name)}
+                  style={{
+                    cursor: "pointer",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    minWidth: "150px",
+                  }}
+                >
+                  {tab.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-4">
+            {selectedTab === "Crear Profesores" && <CreateProfesor />}
+            {selectedTab === "Crear Cursos" && <CreateCurso />}
+            {selectedTab === "Crear Alumnos" && <CreateAlumno />}
+            {selectedTab === "Eliminar Alumnos" && <DeleteAlumnos />}
+            {selectedTab === "Eliminar Profesores" && <DeleteProfesores />}
+            {selectedTab === "Eliminar Cursos" && <DeleteCurso />}
+          </div>
         </div>
       </IonContent>
     </IonPage>
