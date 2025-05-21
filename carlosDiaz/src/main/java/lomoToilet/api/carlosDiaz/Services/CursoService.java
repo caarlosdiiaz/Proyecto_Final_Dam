@@ -22,6 +22,10 @@ public class CursoService {
     return repository.save(curso);
   }
 
+  public Optional<Curso> getCursoById(Long id) {
+    return repository.findById(id);
+  }
+
   public List<Curso> findAllCurso() {
     return repository.findAll();
   }

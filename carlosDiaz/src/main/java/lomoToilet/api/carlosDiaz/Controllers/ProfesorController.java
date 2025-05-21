@@ -24,16 +24,6 @@ public class ProfesorController {
   @Autowired
   private ProfesorService service;
 
-  @Operation(summary = "Obtener todos los profesores", description = "Devuelve una lista de todos los profesores registrados.")
-  @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Lista de profesores obtenida correctamente"),
-      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-  })
-  @GetMapping("/all")
-  public Iterable<Profesor> getAllProfesores() {
-    return service.getAllProfesores();
-  }
-
   @Operation(summary = "Iniciar sesión como profesor", description = "Permite a un profesor iniciar sesión con su email y contraseña.")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Inicio de sesión exitoso"),
@@ -54,6 +44,16 @@ public class ProfesorController {
       );
       return ResponseEntity.ok(profesorDto);
     }).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+  }
+
+  @Operation(summary = "Obtener todos los profesores", description = "Devuelve una lista de todos los profesores registrados.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Lista de profesores obtenida correctamente"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
+  @GetMapping("/all")
+  public Iterable<Profesor> getAllProfesores() {
+    return service.getAllProfesores();
   }
 
   @Operation(summary = "Crear un nuevo profesor", description = "Registra un nuevo profesor en el sistema.")

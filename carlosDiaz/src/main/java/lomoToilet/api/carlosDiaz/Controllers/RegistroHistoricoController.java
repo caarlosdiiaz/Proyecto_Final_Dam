@@ -3,12 +3,16 @@ package lomoToilet.api.carlosDiaz.Controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lomoToilet.api.carlosDiaz.Dtos.AlumnoRegistroDTO;
+import lomoToilet.api.carlosDiaz.Dtos.FechasDTO;
 import lomoToilet.api.carlosDiaz.Models.RegistroHistorico;
 import lomoToilet.api.carlosDiaz.Services.RegistroHistoricoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/registros-historicos")
@@ -26,5 +30,10 @@ public class RegistroHistoricoController {
   @PostMapping("/create")
   public RegistroHistorico crearRegistro(RegistroHistorico registroh) {
     return service.saveRegistro(registroh);
+  }
+
+  @PostMapping("/alumnos-registros")
+  public ResponseEntity<List<AlumnoRegistroDTO>> getAlumnosRegistrosHistoricos(@RequestBody FechasDTO fechasDTO) {
+    return service.obtenerAlumnosRegistrosDeHistoricos(fechasDTO.getFechaInicio(), fechasDTO.getFechaFin());
   }
 }

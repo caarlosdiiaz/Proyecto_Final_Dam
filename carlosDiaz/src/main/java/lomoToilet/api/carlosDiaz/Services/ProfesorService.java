@@ -20,10 +20,6 @@ public class ProfesorService {
   @Autowired
   private CryptConfig crypt;
 
-  public List<Profesor> getAllProfesores() {
-    return repository.findAll();
-  }
-
   public Optional<ProfesorDto> loginProfesor(String email, String contrasena) {
     String emailCifrado = crypt.encrypt(email);
 
@@ -49,6 +45,11 @@ public class ProfesorService {
           profesor.isAdmin()
       );
     });
+  }
+
+
+  public List<Profesor> getAllProfesores() {
+    return repository.findAll();
   }
 
   public void crearProfesor(Profesor profesor) {
