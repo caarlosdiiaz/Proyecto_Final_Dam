@@ -98,3 +98,11 @@ public class AlumnoController {
     service.deleteAlumnosByCurso(id);
   }
 }
+/*
+ Alumno {
+  id: 1
+  nombre: "Juan",
+  apellidos: "Pérez",
+  numLista: 1,
+ }
+* */

@@ -32,6 +32,12 @@ public class RegistroHistoricoController {
     return service.saveRegistro(registroh);
   }
 
+  @Operation(summary = "Obtener registros históricos entre fechas", description = "Obtiene una lista de registros históricos entre dos fechas.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Registros históricos obtenidos correctamente"),
+      @ApiResponse(responseCode = "404", description = "Error en los rangos de fechas"),
+      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+  })
   @PostMapping("/alumnos-registros")
   public ResponseEntity<List<AlumnoRegistroDTO>> getAlumnosRegistrosHistoricos(@RequestBody FechasDTO fechasDTO) {
     return service.obtenerAlumnosRegistrosDeHistoricos(fechasDTO.getFechaInicio(), fechasDTO.getFechaFin());
